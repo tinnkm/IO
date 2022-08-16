@@ -30,7 +30,7 @@ public class KafkaServer {
                 this.socketServer = new SocketServer(time);
                 socketServer.startup(false);
                 this.dataPlaneRequestProcessor = createKafkaApis(this.socketServer.dataPlaneRequestChannel);
-                this.dataPlaneRequestHandlerPool = new KafkaRequestHandlerPool(this.socketServer.dataPlaneRequestChannel,this.dataPlaneRequestProcessor);
+                this.dataPlaneRequestHandlerPool = new KafkaRequestHandlerPool(-1,time,this.socketServer.dataPlaneRequestChannel,this.dataPlaneRequestProcessor);
                 this.socketServer.startProcessingRequests();
                 shutdownLatch = new CountDownLatch(1);
                 startupComplete.set(true);
